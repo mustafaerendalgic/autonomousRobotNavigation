@@ -1,0 +1,21 @@
+<launch>
+
+  <!-- Set TurtleBot3 model -->
+  <env name="TURTLEBOT3_MODEL" value="burger"/>
+
+  <!-- Start Gazebo world -->
+  <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch"/>
+
+  <!-- Start SLAM (gmapping) -->
+  <include file="$(find turtlebot3_slam)/launch/turtlebot3_slam.launch">
+    <arg name="slam_methods" value="gmapping"/>
+  </include>
+
+  <!-- Start autonomous exploration node -->
+  <node
+    pkg="auto_nav"
+    type="auto_explorer.py"
+    name="auto_explorer"
+    output="screen"/>
+
+</launch>
